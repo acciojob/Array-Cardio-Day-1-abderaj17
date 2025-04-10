@@ -53,7 +53,7 @@ return inventors.sort((a, b) => a.year - b.year);
 // 4. How many years did all the inventors live?
 // Return the total number of years all the inventors lived
 export function reduce() {
-
+return inventors.reduce((total, inventor) => total + (inventor.passed - inventor.year), 0);
 }
 
 // 5. Sort the inventors by years lived and return the sorted array
@@ -64,7 +64,11 @@ export function sortbylived() {
 // 6. sort Exercise
 // Sort the people alphabetically by last name and return the sorted array
 export function sortByLastName() {
-
+return people.sort((a, b) => {
+	const lastNameA = a.split(', ')[0];
+	const lastNameB = b.split(', ')[0];
+	return lastNameA.localCompare(lastNameB);
+})
 }
 
 // 7. Reduce Exercise
@@ -73,4 +77,12 @@ const data = ['car', 'car', 'truck', 'truck', 'bike', 'walk', 'car', 'van', 'bik
 
 export function reducedSum() {
     // Return an object containing transports as key and its number of occurances as the key's value
+	return data.reduce((acc, current) => {
+		if(acc[current]){
+			acc[current]++;
+		}else{
+			acc[current] = 1;
+		}
+		return acc;
+	}, {});
 }
